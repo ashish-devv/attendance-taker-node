@@ -1,0 +1,50 @@
+<%- include("header",{title:"DashBoard"}) %>
+<%- include("navbar") %>
+<div class="container-fluid ">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="h1 mx-4">DashBoard</h1>
+            <div class="card mx-4 border border-dark">
+                <div class="card-header">
+                    Take A New Attendance .
+                </div>
+                <div class="card-body ">
+                    <label class="card-title" for="classname">Class Name :</label>
+                    <p class="card-text">
+                        <input type="text" name="classname" id="classname" class="form-control" placeholder="Enter Your Class Name." required autocomplete="off">
+                        <br>
+                        <input type="text" class="" readonly disabled placeholder="Class Code.">
+                        <hr>
+                        <button class="btn btn-outline-success mx-2 border border-dark"><i class="far fa-copy"></i></button>
+                        <button class="btn btn-outline-dark mx-2 border border-dark"><i class="fas fa-share-alt"></i></button>
+                    </p>
+                    <a href="#" class="btn btn-primary">Make New Class</a>
+                </div>
+            </div>
+            <hr>
+            <div class="card mx-4 border border-dark">
+                <div class="card-header">
+                    Take A New Attendance .
+                </div>
+                <div class="card-body ">
+                    <label class="card-title" for="classname">Class Name :</label>
+                    <p class="card-text">
+                        <input type="text" name="classname" id="classname" class="form-control" placeholder="Enter Your Class Name."
+                            required autocomplete="off">
+                        <br>
+                        <input type="text" class="" readonly disabled placeholder="Class Code.">
+                        <hr>
+                        <button class="btn btn-outline-success mx-2 border border-dark"><i class="far fa-copy"></i></button>
+                        <button class="btn btn-outline-dark mx-2 border border-dark"><i class="fas fa-share-alt"></i></button>
+                    </p>
+                    <a href="#" class="btn btn-primary">Make New Class</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+        <img src="img/clip-distance-education.png" alt="" class="img-fluid">
+        </div>
+    </div>
+</div>
+<%- include("footer") %>
+

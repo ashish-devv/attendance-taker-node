@@ -3,9 +3,9 @@
 <div class="container-fluid ">
     <div class="row">
         <div class="col-sm-8">
-            <h1 class="h1 mx-4">DashBoard</h1>
+            <h1 class="h1 mx-4">DashBoard.</h1>
             <div class="card mx-4 border border-dark">
-                <div class="card-header">
+                <div class="card-header ">
                     Take A New Attendance .
                 </div>
                 <div class="card-body ">
@@ -23,21 +23,38 @@
             </div>
             <hr>
             <div class="card mx-4 border border-dark">
-                <div class="card-header">
-                    Take A New Attendance .
+                <div class="card-header text-center text-white bg-primary">
+                   All Classes <button class="btn btn-outline-light"><i class="fas fa-sync"></i></button>
                 </div>
-                <div class="card-body ">
-                    <label class="card-title" for="classname">Class Name :</label>
-                    <p class="card-text">
-                        <input type="text" name="classname" id="classname" class="form-control" placeholder="Enter Your Class Name."
-                            required autocomplete="off">
-                        <br>
-                        <input type="text" class="" readonly disabled placeholder="Class Code.">
-                        <hr>
-                        <button class="btn btn-outline-success mx-2 border border-dark"><i class="far fa-copy"></i></button>
-                        <button class="btn btn-outline-dark mx-2 border border-dark"><i class="fas fa-share-alt"></i></button>
-                    </p>
-                    <a href="#" class="btn btn-primary">Make New Class</a>
+                <div class="card-body table-responsive-sm">
+                    <table class="table table-sm table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                
+                                <th scope="col">Class Name</th>
+                                <th scope="col">Created On</th>
+                                <th scope="col">Code</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                            cl.forEach((x)=>{ %>
+                                <tr>
+                                    <td><%= x.classname %></td>
+                                    <td><%= x.createdon %></td>
+                                    <td>
+                                        <%= x.classcode %>
+                                    </td>
+                                    <td><a href="">See Attendance</a></td>
+                                </tr>
+                                <%
+                            })
+                            %>
+                            
+                            
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -46,5 +63,6 @@
         </div>
     </div>
 </div>
+
 <%- include("footer") %>
 

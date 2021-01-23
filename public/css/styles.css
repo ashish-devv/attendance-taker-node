@@ -1,3 +1,7 @@
+.dark-mode {
+  filter: invert(95%);
+}
+
 body {
   font-family: "Poppins";
 }

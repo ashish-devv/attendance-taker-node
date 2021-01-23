@@ -10,10 +10,29 @@
                 <a class="nav-link" href="#"><i class="fas fa-home"></i> Home</a>
             </li>
             <li class="nav-item active">
+                <a class="nav-link" href="#">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch1" name="checkbox">
+                        <label class="custom-control-label" for="customSwitch1">Dark Mode 🌙</label>
+                    </div>
+                </i> </a>
+            </li>
+            <li class="nav-item active">
                 <a class="nav-link" href="#">Logout <i class="fas fa-sign-out-alt"></i> </a>
             </li>
             
             
         </ul>
     </div>
+    <script>
+        var checkbox = document.querySelector("input[name=checkbox]");
+
+            checkbox.addEventListener('change', function () {
+                if (this.checked) {
+                    document.documentElement.classList.toggle("dark-mode");
+                } else {
+                    document.documentElement.classList.toggle("dark-mode");
+                }
+            });
+    </script>
 </nav>

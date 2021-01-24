@@ -24,9 +24,8 @@ mongoose.connect("mongodb://localhost:27017/attendance",{ useNewUrlParser: true 
 mongoose.set('useCreateIndex', true);
 
 const user= mongoose.Schema({
-    _id:false,
     name:{type:String,required:true},
-    registration:{type:String,required:true,unique:true},
+    registration:{type:String,required:true},
     email:{type:String,required:true},
     datetime:{type:Date,required:true}
 })
@@ -35,7 +34,7 @@ const classschema= mongoose.Schema({
     classname:{ type : String , required : true},
     classcode:{ type : String , unique : true, required : true},
     createdon:{ type : Date , required : true},
-    attendes:{type:[user]}
+    attendes:{type:[user],unique:false}
 });
 
 const Class= mongoose.model("Class",classschema);
@@ -58,7 +57,7 @@ app.route("/loginteacher")
 
 app.route("/dashboard")
 .get((req,res)=>{
-    Class.find({},(err,allclasses)=>{
+    Class.find({},null,{sort:{createdon:-1}},(err,allclasses)=>{
         if(!err)
         {
             if(allclasses)
@@ -93,6 +92,48 @@ app.route("/dashboard")
     // console.log(req.body);
     // console.log(randomstring.generate(7));
     res.json(ob);
+});
+
+app.get("/getallclasslist",(req,res)=>{
+    Class.find({},null,{sort:{createdon:-1}},(err,allclasses)=>{
+        if(!err)
+        {
+            if(allclasses)
+            {
+                res.json(allclasses);
+                //res.render("teacherdashboard",{cl:allclasses});
+            }
+            else{
+                res.json([]);
+                //res.render("teacherdashboard",{cl:[]});
+            }
+        }
+        else{
+            res.status(404).json([{error:"error Occured"}]);
+        }
+    })
+
+})
+
+app.get("/viewattendancelist/:classcode",(req,res)=>{
+    const code = req.params.classcode;
+    Class.findOne({classcode:code},(err,listofattende)=>{
+        if(!err)
+        {
+            
+            if(listofattende && listofattende.length!=0)
+            {
+                console.log(listofattende);
+                res.render("viewattendlist",{alldetail:listofattende});
+            }
+            else{
+                res.status(404);
+            }
+        }
+        else{
+            res.status(404);
+        }
+    })
 })
 
 app.post("/presentsir/:code",(req,res)=>{

@@ -22,7 +22,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Generate New Code</button>
-                    <button type="button" class="btn btn-primary">Copy Code ©</button>
+                    <button type="button" class="btn btn-primary" ng-click="copyfunc();">Copy Code To Clipboard ©</button>
                 </div>
             </div>
         </div>
@@ -38,15 +38,19 @@
                     Take A New Attendance .
                 </div>
                 <div class="card-body ">
+                    <p>
+                        <img src="<%= pic %>" alt="Profile Picture" class="img-fluid rounded-circle border border-dark mb-2">
+                        Name: <%= name %>
+                    </p>
                     <form ng-submit="createclass();">
                     <label class="card-title" for="classname">Class Name :</label>
                     <p class="card-text">
-                        <input type="text" name="classname" id="classname" class="form-control" placeholder="Enter Your Class Name." required autocomplete="off" ng-model="classname">
+                        <input type="text" name="classname" id="classname" class="form-control" placeholder="Enter Your Class Name." required autocomplete="off" ng-model="classname" autofocus title="Give Your Class Name" style="cursor: pointer;">
                         <br>
-                        <input type="text" class="" readonly disabled placeholder="Class Code." ng-model="classcode"><small class="text-muted mx-1">Share This With Students.</small>
+                        <input type="text" class="" readonly disabled placeholder="Class Code." ng-model="classcode" id="code"><small class="text-muted mx-1">Share This With Students.</small>
                         <hr>
-                        <button class="btn btn-outline-success mx-2 border border-dark" title="Copy Code" data-toggle="modal" data-target="#exampleModal" type="button"><i class="far fa-copy"></i></button>
-                        <button class="btn btn-outline-dark mx-2 border border-dark"><i class="fas fa-share-alt"></i></button>
+                        <button ng-if="classcode" class="btn btn-outline-success mx-2 border border-dark" title="Copy Code" data-toggle="modal" data-target="#exampleModal" type="button"><i class="far fa-copy"></i> Copy Code</button>
+                        <a ng-if="classcode" class="btn btn-outline-dark mx-2 border border-dark" href="whatsapp://send?text=Enter This Code :* {{classcode}} *To Mark Your Attendance"><i class="fas fa-share-alt"></i> Share On WhatsApp <i class="fab fa-whatsapp"></i></a>
                     </p>
                     <button class="btn btn-primary" type="submit">Make New Class</button>
                     </form>
@@ -81,19 +85,7 @@
                                 </td>
                                 <td><a href="/viewattendancelist/{{x.classcode}}">See Attendance</a></td>
                             </tr>
-                            <!-- <%
-                            cl.forEach((x)=>{ %>
-                                <tr>
-                                    <td><%= x.classname %></td>
-                                    <td><%= x.createdon %></td>
-                                    <td>
-                                        <%= x.classcode %>
-                                    </td>
-                                    <td><a href="">See Attendance</a></td>
-                                </tr>
-                                <%
-                            })
-                            %> -->
+                            
                             
                             
                         </tbody>

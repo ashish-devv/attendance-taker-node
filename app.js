@@ -9,6 +9,7 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const randomstring = require("randomstring");
 const findorcreate = require("mongoose-findorcreate");
+const Parser=require("json2csv");
 
 const app = express();
 app.use(bodyparser.urlencoded({ extended: true }));
@@ -263,6 +264,29 @@ app.post("/presentsir/:code", ensureAuthenticated, (req, res) => {
     }
   });
 });
+
+const downloadResource = (res, fileName, fields, data) => {
+  const json2csv = new Parser({ fields });
+  const csv = json2csv.parse(data);
+  res.header('Content-Type', 'text/csv');
+  res.attachment(fileName);
+  return res.send(csv);
+}
+
+app.get("/download/:code",(req,res)=>{
+  Class.findOne({classcode:req.params.code},{attendes:1,_id:0},(err,classatten)=>{
+    if(!err)
+    {
+      if(classatten)
+      {
+        console.log(classatten);
+        const fields = ['name', 'registration', 'email','datetime'];
+        const opts = { fields };
+        return downloadResource(res, 'users.csv', opts, classatten);
+      }
+    }
+  })
+})
 
 app.get("/logout", function (req, res) {
   req.logout();
